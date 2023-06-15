@@ -52,6 +52,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>${project.name}-runner</finalName>
 	</build>
 
 </project>

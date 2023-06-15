@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: tc
+      POSTGRES_PASSWORD: postgres
+
+  app:
+    container_name: application
+    image: tc-s1-32:latest
+    ports: 
+        - 8080:8080
+    depends_on:
+        - db
+    environment:
+        spring.datasource.url: jdbc:postgresql://db:5432/tc
