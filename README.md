@@ -8,5 +8,5 @@ Documentação de apoio: https://spring.io/guides/gs/multi-module/
 Para executar:
 
 ```
-./mvnw install && ./mvnw spring-boot:run -pl application
+./mvnw install -DskipTests && ./mvnw spring-boot:run -pl application
 ```
