@@ -10,8 +10,9 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Produto {
+@Builder
+@Entity(name = "PRODUTO")
+public class ProdutoEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

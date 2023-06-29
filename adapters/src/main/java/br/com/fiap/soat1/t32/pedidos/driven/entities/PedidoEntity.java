@@ -16,8 +16,8 @@ import static jakarta.persistence.EnumType.STRING;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Pedido {
+@Entity(name = "PEDIDO")
+public class PedidoEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -31,7 +31,11 @@ public class Pedido {
     private Cliente cliente;
 
     @ManyToMany
-    private List<Produto> produtos;
+    @JoinTable(
+            name = "PEDIDO_PRODUTO",
+            joinColumns = @JoinColumn(name = "PEDIDO_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUTO_ID"))
+    private List<ProdutoEntity> produtoEntities;
 
 
 }
