@@ -70,5 +70,4 @@ public class ProdutoResource {
 
         return ResponseEntity.ok(ProdutoMapper.mapResponse(produtos));
     }
-
 }

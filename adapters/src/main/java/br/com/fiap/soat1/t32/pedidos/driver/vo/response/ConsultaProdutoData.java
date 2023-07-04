@@ -18,5 +18,4 @@ public class ConsultaProdutoData {
     private BigDecimal preco;
     private String descricao;
     private CategoriaProduto categoria;
-
 }

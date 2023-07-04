@@ -1,7 +1,7 @@
 package br.com.fiap.soat1.t32.pedidos.driven.entities;
 
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPedido;
-import br.com.fiap.soat1.t32.vendas.driven.entities.Cliente;
+import br.com.fiap.soat1.t32.vendas.driven.entities.ClienteEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class PedidoEntity {
     private StatusPedido status;
 
     @ManyToOne
-    private Cliente cliente;
+    private ClienteEntity cliente;
 
     @ManyToMany
     @JoinTable(
