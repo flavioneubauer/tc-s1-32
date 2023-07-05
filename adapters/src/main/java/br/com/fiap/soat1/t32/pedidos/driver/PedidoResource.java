@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.fiap.soat1.t32.pedidos.driver.vo.request.PedidoVo;
 import br.com.fiap.soat1.t32.pedidos.driver.vo.response.CriacaoPedidoResponse;
+import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ListaPedidosResponse;
 import br.com.fiap.soat1.t32.pedidos.use_case.PedidoService;
 import br.com.fiap.soat1.t32.pedidos.utils.mappers.PedidoMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ class PedidoResource {
 
 	@GetMapping("/v1/pedidos")
 	public ResponseEntity<ListaPedidosResponse> listarPedidos() {
-		return ResponseEntity.ok(PedidoMapper.toResponse(pedidoService.listarPedidos())).build();
+		return ResponseEntity.ok(pedidoMapper.toListaResponse(pedidoService.listarPedidos()));
 	}
 
 }

@@ -1,5 +1,7 @@
 package br.com.fiap.soat1.t32.pedidos.use_case;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.soat1.t32.pedidos.domain.Pedido;
@@ -21,5 +23,9 @@ public class PedidoService {
 
 	public void alterarStatusPedido(Long id, StatusPedido statusPedido){
 		pedidoPort.alterarStatusPedido(id, statusPedido);
+	}
+	
+	public List<Pedido> listarPedidos(){
+		return pedidoPort.listarPedidos();
 	}
 }
