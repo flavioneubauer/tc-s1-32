@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@Tag(name = "Produto", description = "API de Produtos")
-@RequestMapping(value = "/v1/produtos",
+@Tag(name = "Checkout", description = "API de Checkout de Pedidos")
+@RequestMapping(value = "/v1/checkout",
         consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
         produces = {APPLICATION_JSON_VALUE})
 @RestController

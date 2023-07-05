@@ -13,6 +13,6 @@ import java.util.List;
 @Builder
 public class ConsultaProdutoResponse {
 
-    private List<ConsultaProdutoData> data;
+    private List<ConsultaProdutoData> produtos;
 
 }

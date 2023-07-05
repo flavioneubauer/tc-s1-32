@@ -15,6 +15,6 @@ import java.util.UUID;
 public class CheckoutVo {
 
     private List<ProdutoCheckoutVo> produtos;
-    private UUID cliente;
+    private ClienteCheckoutVo cliente;
 
 }

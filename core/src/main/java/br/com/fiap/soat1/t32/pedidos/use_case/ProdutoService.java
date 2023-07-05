@@ -1,5 +1,6 @@
 package br.com.fiap.soat1.t32.pedidos.use_case;
 
+import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pedidos.domain.CategoriaProduto;
 import br.com.fiap.soat1.t32.pedidos.domain.Produto;
 import br.com.fiap.soat1.t32.pedidos.ports.ProdutoPort;
@@ -17,17 +18,17 @@ public class ProdutoService {
 
     private final ProdutoPort produtoPort;
 
-    public void criarProduto(Produto produto) {
+    public Long criarProduto(Produto produto) {
 
         validaProduto(produto);
 
-        this.produtoPort.criarProduto(produto);
+        return this.produtoPort.criarProduto(produto);
     }
 
     private void validaProduto(Produto produto) {
         if(isNull(produto.getCategoria()) || isNull(produto.getDescricao()) ||
                 (isNull(produto.getPreco()) || BigDecimal.ZERO.equals(produto.getPreco()))) {
-            throw new RuntimeException("Dados inválidos para alteração/inclusão de produto.");
+            throw new ValidationException("Dados inválidos para alteração/inclusão de produto.");
         }
     }
 

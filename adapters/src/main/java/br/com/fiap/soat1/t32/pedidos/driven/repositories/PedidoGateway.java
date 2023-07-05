@@ -1,5 +1,6 @@
 package br.com.fiap.soat1.t32.pedidos.driven.repositories;
 
+import br.com.fiap.soat1.t32.pedidos.domain.StatusPedido;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.soat1.t32.pedidos.domain.Pedido;
@@ -20,6 +21,16 @@ public class PedidoGateway implements PedidoPort {
 		var pedidoEntity = pedidoMapper.toEntity(pedido);
 		pedidoDao.save(pedidoEntity);
 		return pedidoEntity.getId(); 
+	}
+
+	@Override
+	public void alterarStatusPedido(Long id, StatusPedido statusPedido) {
+		var pedido = pedidoDao.findById(id);
+
+		pedido.ifPresent(pedidoEntity -> {
+			pedidoEntity.setStatus(statusPedido);
+			pedidoDao.save(pedidoEntity);
+		});
 	}
 
 }

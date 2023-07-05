@@ -3,11 +3,11 @@ package br.com.fiap.soat1.t32.pedidos.driver;
 import br.com.fiap.soat1.t32.pedidos.domain.CategoriaProduto;
 import br.com.fiap.soat1.t32.pedidos.driver.vo.request.ProdutoVo;
 import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ConsultaProdutoResponse;
+import br.com.fiap.soat1.t32.pedidos.driver.vo.response.CriacaoProdutoResponse;
 import br.com.fiap.soat1.t32.pedidos.use_case.ProdutoService;
 import br.com.fiap.soat1.t32.pedidos.utils.mappers.ProdutoMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +29,11 @@ public class ProdutoResource {
     @Operation(description = "Inclui produto")
     @PostMapping(consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
             produces = {ALL_VALUE})
-    public ResponseEntity<Void> criarProduto(@RequestBody @Valid ProdutoVo produtoVo) {
+    public ResponseEntity<CriacaoProdutoResponse> criarProduto(@RequestBody ProdutoVo produtoVo) {
 
-        produtoService.criarProduto(ProdutoMapper.map(produtoVo, null));
+        final var idProduto = produtoService.criarProduto(ProdutoMapper.toDomain(produtoVo, null));
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(ProdutoMapper.toResponse(idProduto));
     }
 
     @Operation(description = "Exclui produto")
@@ -52,9 +52,9 @@ public class ProdutoResource {
             consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
             produces = {ALL_VALUE})
     public ResponseEntity<Void> editarProduto(@PathVariable Long produtoId,
-                                              @RequestBody @Valid ProdutoVo produtoVo) {
+                                              @RequestBody ProdutoVo produtoVo) {
 
-        produtoService.editarProduto(ProdutoMapper.map(produtoVo, produtoId));
+        produtoService.editarProduto(ProdutoMapper.toDomain(produtoVo, produtoId));
 
         return ResponseEntity.noContent().build();
     }
@@ -68,6 +68,6 @@ public class ProdutoResource {
         final var produtos =
                 produtoService.consultarProdutoPorCategoria(categoriaProduto);
 
-        return ResponseEntity.ok(ProdutoMapper.mapResponse(produtos));
+        return ResponseEntity.ok(ProdutoMapper.toResponse(produtos));
     }
 }

@@ -18,4 +18,8 @@ public class PedidoService {
     	var pedidoId = pedidoPort.criarPedido(pedido);
     	return pedidoId;
     }
+
+	public void alterarStatusPedido(Long id, StatusPedido statusPedido){
+		pedidoPort.alterarStatusPedido(id, statusPedido);
+	}
 }

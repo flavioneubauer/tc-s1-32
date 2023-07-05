@@ -3,9 +3,9 @@ package br.com.fiap.soat1.t32.pagamentos.utils.mappers;
 import br.com.fiap.soat1.t32.pagamentos.domain.Checkout;
 import br.com.fiap.soat1.t32.pagamentos.domain.ProdutoCheckout;
 import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.CheckoutVo;
+import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.ClienteCheckoutVo;
 import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.ProdutoCheckoutVo;
 import br.com.fiap.soat1.t32.pagamentos.driver.vo.response.CheckoutResponse;
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.util.stream.Collectors;
@@ -17,7 +17,9 @@ public final class CheckoutMapper {
 
     public static CheckoutVo toRequest(Checkout checkout) {
         return CheckoutVo.builder()
-                .cliente(checkout.getCliente())
+                .cliente(ClienteCheckoutVo.builder()
+                        .id(checkout.getCliente())
+                        .build())
                 .produtos(checkout.getProdutos().stream()
                         .map(produto -> ProdutoCheckoutVo.builder()
                                 .id(produto.getId())
@@ -30,7 +32,7 @@ public final class CheckoutMapper {
 
     public static Checkout toDomain(CheckoutVo checkout) {
         return Checkout.builder()
-                .cliente(checkout.getCliente())
+                .cliente(checkout.getCliente().getId())
                 .produtos(checkout.getProdutos().stream()
                         .map(produto -> ProdutoCheckout.builder()
                                 .id(produto.getId())
