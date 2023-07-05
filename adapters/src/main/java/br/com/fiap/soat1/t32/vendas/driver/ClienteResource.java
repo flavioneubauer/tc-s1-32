@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.soat1.t32.utils.mappers.ClienteMapper;
+import br.com.fiap.soat1.t32.vendas.utils.mappers.ClienteMapper;
 import br.com.fiap.soat1.t32.vendas.driver.vo.request.ClienteVO;
 import br.com.fiap.soat1.t32.vendas.driver.vo.response.ConsultaClienteResponse;
 import br.com.fiap.soat1.t32.vendas.use_case.ClienteService;

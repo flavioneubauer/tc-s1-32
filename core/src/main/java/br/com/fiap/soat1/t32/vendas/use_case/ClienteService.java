@@ -5,24 +5,24 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.soat1.t32.utils.validadores.CpfValidator;
+import br.com.fiap.soat1.t32.vendas.utils.validadores.CpfValidator;
 import br.com.fiap.soat1.t32.vendas.domain.Cliente;
-import br.com.fiap.soat1.t32.vendas.ports.ClienteRepository;
+import br.com.fiap.soat1.t32.vendas.ports.ClientePort;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ClienteService {
 
-	private final ClienteRepository clienteRepository;
+	private final ClientePort clientePort;
 	
 	public void cadastrarCliente(Cliente cliente) {
 		validarCliente(cliente);
-		this.clienteRepository.cadastrarCliente(cliente);
+		this.clientePort.cadastrarCliente(cliente);
 	}
 	
 	public Cliente consultarClientePorCpf(String cpf) {
-		return this.clienteRepository.consultarClientePorCpf(cpf);
+		return this.clientePort.consultarClientePorCpf(cpf);
 	}
 	
 	private void validarCliente(Cliente cliente) {

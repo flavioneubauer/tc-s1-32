@@ -3,8 +3,8 @@ package br.com.fiap.soat1.t32.pedidos.driven.repositories;
 import br.com.fiap.soat1.t32.pedidos.domain.CategoriaProduto;
 import br.com.fiap.soat1.t32.pedidos.domain.Produto;
 import br.com.fiap.soat1.t32.pedidos.driven.repositories.dao.ProdutoDAO;
-import br.com.fiap.soat1.t32.pedidos.ports.ProdutoRepository;
-import br.com.fiap.soat1.t32.utils.mappers.ProdutoMapper;
+import br.com.fiap.soat1.t32.pedidos.ports.ProdutoPort;
+import br.com.fiap.soat1.t32.pedidos.utils.mappers.ProdutoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Repository
 @RequiredArgsConstructor
-public class ProdutoRepositoryImpl implements ProdutoRepository {
+public class ProdutoRepositoryImpl implements ProdutoPort {
 
     private final ProdutoDAO produtoDAO;
 

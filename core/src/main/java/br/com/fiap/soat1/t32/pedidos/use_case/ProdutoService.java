@@ -2,7 +2,7 @@ package br.com.fiap.soat1.t32.pedidos.use_case;
 
 import br.com.fiap.soat1.t32.pedidos.domain.CategoriaProduto;
 import br.com.fiap.soat1.t32.pedidos.domain.Produto;
-import br.com.fiap.soat1.t32.pedidos.ports.ProdutoRepository;
+import br.com.fiap.soat1.t32.pedidos.ports.ProdutoPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +15,13 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 public class ProdutoService {
 
-    private final ProdutoRepository produtoRepository;
+    private final ProdutoPort produtoPort;
 
     public void criarProduto(Produto produto) {
 
         validaProduto(produto);
 
-        this.produtoRepository.criarProduto(produto);
+        this.produtoPort.criarProduto(produto);
     }
 
     private void validaProduto(Produto produto) {
@@ -32,15 +32,15 @@ public class ProdutoService {
     }
 
     public void excluirProduto(Long produtoId) {
-        this.produtoRepository.excluirProduto(produtoId);
+        this.produtoPort.excluirProduto(produtoId);
     }
 
     public void editarProduto(Produto produto) {
-        this.produtoRepository.editarProduto(produto);
+        this.produtoPort.editarProduto(produto);
     }
 
     public Set<Produto> consultarProdutoPorCategoria(CategoriaProduto categoriaProduto) {
-        return this.produtoRepository.consultarProdutoPorCategoria(categoriaProduto);
+        return this.produtoPort.consultarProdutoPorCategoria(categoriaProduto);
     }
 
 }

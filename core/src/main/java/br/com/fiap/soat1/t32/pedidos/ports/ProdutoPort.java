@@ -5,7 +5,7 @@ import br.com.fiap.soat1.t32.pedidos.domain.Produto;
 
 import java.util.Set;
 
-public interface ProdutoRepository {
+public interface ProdutoPort {
 
     void criarProduto(Produto produto);
     void excluirProduto(Long produtoId);

@@ -1,4 +1,4 @@
-package br.com.fiap.soat1.t32.utils.mappers;
+package br.com.fiap.soat1.t32.pedidos.utils.mappers;
 
 import br.com.fiap.soat1.t32.pedidos.domain.Produto;
 import br.com.fiap.soat1.t32.pedidos.driven.entities.ProdutoEntity;
