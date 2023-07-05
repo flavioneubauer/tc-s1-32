@@ -7,20 +7,21 @@ import br.com.fiap.soat1.t32.vendas.domain.Cliente;
 import br.com.fiap.soat1.t32.vendas.driven.repositories.dao.ClienteDao;
 import br.com.fiap.soat1.t32.vendas.ports.ClientePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Service
 @RequiredArgsConstructor
-public class ClienteRepositoryImpl implements ClientePort {
+public class ClienteGateway implements ClientePort {
 
 	private final ClienteDao clienteDao;
 
 	@Override
 	public void cadastrarCliente(Cliente cliente) {
-		clienteDao.save(ClienteMapper.map(cliente));
+		clienteDao.save(ClienteMapper.toEntity(cliente));
 	}
 
 	@Override
 	public Cliente consultarClientePorCpf(String cpf) {
-		return ClienteMapper.map(clienteDao.findByCpf(cpf));
+		return ClienteMapper.toDomain(clienteDao.findByCpf(cpf));
 	}
 }
