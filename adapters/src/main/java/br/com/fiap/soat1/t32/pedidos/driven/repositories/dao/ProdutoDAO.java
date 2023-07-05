@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
-@Repository
 public interface ProdutoDAO extends CrudRepository<ProdutoEntity, Long> {
 
     ProdutoEntity save(ProdutoEntity entity);
