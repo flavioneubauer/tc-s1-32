@@ -31,7 +31,7 @@ public class ClienteResource {
 
 	private final ClienteService clienteService;
 	
-	@Operation(description = "Inclui produto")
+	@Operation(description = "Inclui cliente")
     @PostMapping(consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
             produces = {ALL_VALUE})
     public ResponseEntity<Void> cadastrarCliente(@RequestBody @Valid ClienteVO clienteVO) {
