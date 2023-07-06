@@ -33,3 +33,7 @@ docker compose build
 ```
 docker compose up
 ```
+
+Para escalar a aplicação, utilzar `docker compose up --scale app=3` e serão instanciadas 3 aplicações de backend nas portas 8080, 8081 e 8082.
+
+Durante os testes foi utilizada a versão 24.0.0 do docker engine e v2.17.3 do docker compose.

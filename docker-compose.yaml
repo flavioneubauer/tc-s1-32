@@ -8,13 +8,12 @@ services:
       POSTGRES_DB: tc
       POSTGRES_PASSWORD: postgres
   app:
-    container_name: application
     image: tc-s1-32:latest
     build:
       dockerfile: Dockerfile
       context: .
     ports: 
-        - 8080:8080
+        - 8080-8083:8080
     depends_on:
         - db
     environment:
