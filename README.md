@@ -36,4 +36,6 @@ docker compose up
 
 Para escalar a aplicação, utilzar `docker compose up --scale app=3` e serão instanciadas 3 aplicações de backend nas portas 8080, 8081 e 8082.
 
+Caso não suba mais de uma instância, utilize o comando `docker compose up` e verifique a porta em que a aplicação subiu utilizando o comando `docker ps`. A porta estará no range de 8080 a 8083.
+
 Durante os testes foi utilizada a versão 24.0.0 do docker engine e v2.17.3 do docker compose.
