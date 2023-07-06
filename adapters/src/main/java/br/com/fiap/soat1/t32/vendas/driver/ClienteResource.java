@@ -3,6 +3,10 @@ package br.com.fiap.soat1.t32.vendas.driver;
 import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import br.com.fiap.soat1.t32.handler.vo.RespostaErro;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +38,9 @@ public class ClienteResource {
 	@Operation(description = "Inclui cliente")
     @PostMapping(consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
             produces = {ALL_VALUE})
+	@ApiResponse(responseCode = "201", description = "Cliente cadastrado com sucesso")
+	@ApiResponse(responseCode = "422", description = "Erro de validação",
+			content = @Content(schema = @Schema(implementation = RespostaErro.class)))
     public ResponseEntity<Void> cadastrarCliente(@RequestBody @Valid ClienteVO clienteVO) {
 
 		clienteService.cadastrarCliente(ClienteMapper.toDomain(clienteVO, null));
@@ -45,7 +52,10 @@ public class ClienteResource {
 	@GetMapping(path = "/{cpf}", 
 		consumes = { ALL_VALUE }, 
 		produces = { APPLICATION_JSON_VALUE, ALL_VALUE })
-	public ResponseEntity<ConsultaClienteResponse> consultarProdutoPorCategoria(@PathVariable String cpf) {
+	@ApiResponse(responseCode = "200", description = "Clientes listados com sucesso")
+	@ApiResponse(responseCode = "422", description = "Erro de validação",
+			content = @Content(schema = @Schema(implementation = RespostaErro.class)))
+	public ResponseEntity<ConsultaClienteResponse> consultarClientePorCpf(@PathVariable String cpf) {
 
 		final var cliente = clienteService.consultarClientePorCpf(cpf);
 
