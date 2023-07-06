@@ -3,13 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>soat1.turma32</groupId>
+    <groupId>br.com.fiap.soat1.t32</groupId>
     <artifactId>tc</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>lib/core</module>
+        <module>core</module>
+        <module>adapters</module>
         <module>application</module>
     </modules>
 
