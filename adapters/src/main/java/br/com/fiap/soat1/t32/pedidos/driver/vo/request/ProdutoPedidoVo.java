@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ProdutoPedidoVo {
 	private Long id;
-	private Integer quantidade;
+	private Long quantidade;
 }

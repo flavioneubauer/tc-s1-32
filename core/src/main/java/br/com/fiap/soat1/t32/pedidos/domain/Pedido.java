@@ -16,5 +16,5 @@ public class Pedido {
     private Long id;
     private StatusPedido status;
     private Cliente cliente;
-    private List<Produto> produtos;
+    private List<PedidoProduto> produtos;
 }

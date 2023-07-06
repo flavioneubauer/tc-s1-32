@@ -17,7 +17,7 @@ public final class CheckoutMapper {
 
     public static CheckoutVo toRequest(Checkout checkout) {
         return CheckoutVo.builder()
-                .cliente(ClienteCheckoutVo.builder()
+                .cliente(checkout.getCliente() == null ? null : ClienteCheckoutVo.builder()
                         .id(checkout.getCliente())
                         .build())
                 .produtos(checkout.getProdutos().stream()
@@ -32,7 +32,7 @@ public final class CheckoutMapper {
 
     public static Checkout toDomain(CheckoutVo checkout) {
         return Checkout.builder()
-                .cliente(checkout.getCliente().getId())
+                .cliente(checkout.getCliente() == null ? null : checkout.getCliente().getId())
                 .produtos(checkout.getProdutos().stream()
                         .map(produto -> ProdutoCheckout.builder()
                                 .id(produto.getId())
