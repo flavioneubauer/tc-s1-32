@@ -1,14 +1,13 @@
 package br.com.fiap.soat1.t32.vendas.driven.repositories;
 
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import br.com.fiap.soat1.t32.exceptions.DuplicateKeyException;
 import br.com.fiap.soat1.t32.vendas.domain.Cliente;
 import br.com.fiap.soat1.t32.vendas.driven.repositories.dao.ClienteDao;
 import br.com.fiap.soat1.t32.vendas.ports.ClientePort;
 import br.com.fiap.soat1.t32.vendas.utils.mappers.ClienteMapper;
-import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 
 @Service
