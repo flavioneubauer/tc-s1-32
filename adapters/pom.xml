@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
+        <version>3.1.1</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.fiap.soat1.t32</groupId>
     <artifactId>adapters</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>adapters</name>
     <description>Projeto da turma 32 soat 1</description>
     <properties>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>br.com.fiap.soat1.t32</groupId>
             <artifactId>core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -68,18 +68,4 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>tc.soat1.turma32.backend.BackendApplication</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-        <finalName>${project.name}-runner</finalName>
-    </build>
-
 </project>

@@ -1,7 +1,8 @@
 package br.com.fiap.soat1.t32.pagamentos.driven;
 
+import org.springframework.stereotype.Service;
+
 import br.com.fiap.soat1.t32.exceptions.IntegrationException;
-import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pagamentos.domain.Checkout;
 import br.com.fiap.soat1.t32.pagamentos.driven.client.PedidoClient;
 import br.com.fiap.soat1.t32.pagamentos.ports.CheckoutPort;
@@ -9,7 +10,6 @@ import br.com.fiap.soat1.t32.pagamentos.utils.mappers.CheckoutMapper;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

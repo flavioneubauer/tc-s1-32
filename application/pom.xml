@@ -4,14 +4,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
+        <version>3.1.1</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.fiap.soat1.t32</groupId>
     <artifactId>application</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>Tech Challenge - Fast Food API</name>
-    <description>Projeto da Turma 32 - SOAT 1</description>
+    <version>0.0.2-SNAPSHOT</version>
+    <name>application</name>
+    <description>Tech Challenge - Fast Food API - Projeto da Turma 32 - SOAT 1</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -38,12 +38,12 @@
         <dependency>
             <groupId>br.com.fiap.soat1.t32</groupId>
             <artifactId>core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>br.com.fiap.soat1.t32</groupId>
             <artifactId>adapters</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

@@ -8,7 +8,7 @@ COPY application application
 COPY core core
 COPY adapters adapters
 
-RUN ./mvnw install -DskipTests && ./mvnw clean package -DskipTests
+RUN ./mvnw clean install -DskipTests && ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
