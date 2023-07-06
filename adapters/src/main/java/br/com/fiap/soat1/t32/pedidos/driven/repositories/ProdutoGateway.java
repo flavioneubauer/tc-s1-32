@@ -6,7 +6,6 @@ import br.com.fiap.soat1.t32.pedidos.driven.repositories.dao.ProdutoDAO;
 import br.com.fiap.soat1.t32.pedidos.ports.ProdutoPort;
 import br.com.fiap.soat1.t32.pedidos.utils.mappers.ProdutoMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -33,7 +32,14 @@ public class ProdutoGateway implements ProdutoPort {
     }
 
     @Override
-    public Set<Produto> consultarProdutoPorCategoria(CategoriaProduto categoriaProduto) {
+    public Set<Produto> listarProdutosPorCategoria(CategoriaProduto categoriaProduto) {
         return ProdutoMapper.toDomain(produtoDAO.findAllByCategoria(categoriaProduto));
+    }
+
+    @Override
+    public Produto consultarProduto(Long id) {
+        var produto = produtoDAO.findById(id);
+
+        return produto.map(ProdutoMapper::toDomain).orElse(null);
     }
 }

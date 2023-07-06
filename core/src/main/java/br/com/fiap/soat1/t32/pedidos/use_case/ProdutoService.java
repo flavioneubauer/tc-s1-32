@@ -33,15 +33,25 @@ public class ProdutoService {
     }
 
     public void excluirProduto(Long produtoId) {
+        validaExclusaoProduto(produtoId);
         this.produtoPort.excluirProduto(produtoId);
+    }
+
+    private void validaExclusaoProduto(Long id) {
+
+        var produto = produtoPort.consultarProduto(id);
+
+        if(produto == null) {
+            throw new ValidationException("Produto não localizado.");
+        }
     }
 
     public void editarProduto(Produto produto) {
         this.produtoPort.editarProduto(produto);
     }
 
-    public Set<Produto> consultarProdutoPorCategoria(CategoriaProduto categoriaProduto) {
-        return this.produtoPort.consultarProdutoPorCategoria(categoriaProduto);
+    public Set<Produto> listarProdutosPorCategoria(CategoriaProduto categoriaProduto) {
+        return this.produtoPort.listarProdutosPorCategoria(categoriaProduto);
     }
 
 }

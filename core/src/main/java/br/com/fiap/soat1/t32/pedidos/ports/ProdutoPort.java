@@ -10,6 +10,7 @@ public interface ProdutoPort {
     Long criarProduto(Produto produto);
     void excluirProduto(Long produtoId);
     void editarProduto(Produto produto);
-    Set<Produto> consultarProdutoPorCategoria(CategoriaProduto categoriaProduto);
+    Set<Produto> listarProdutosPorCategoria(CategoriaProduto categoriaProduto);
+    Produto consultarProduto(Long id);
 
 }

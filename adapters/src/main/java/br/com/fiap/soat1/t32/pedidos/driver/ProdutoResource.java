@@ -28,7 +28,7 @@ public class ProdutoResource {
 
     @Operation(description = "Inclui produto")
     @PostMapping(consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
-            produces = {ALL_VALUE})
+            produces = {APPLICATION_JSON_VALUE, ALL_VALUE})
     public ResponseEntity<CriacaoProdutoResponse> criarProduto(@RequestBody ProdutoVo produtoVo) {
 
         final var idProduto = produtoService.criarProduto(ProdutoMapper.toDomain(produtoVo, null));
@@ -66,7 +66,7 @@ public class ProdutoResource {
     public ResponseEntity<ConsultaProdutoResponse> consultarProdutoPorCategoria(@PathVariable CategoriaProduto categoriaProduto) {
 
         final var produtos =
-                produtoService.consultarProdutoPorCategoria(categoriaProduto);
+                produtoService.listarProdutosPorCategoria(categoriaProduto);
 
         return ResponseEntity.ok(ProdutoMapper.toResponse(produtos));
     }

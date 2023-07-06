@@ -40,7 +40,7 @@ public final class ProdutoMapper {
                 .collect(Collectors.toSet());
     }
 
-    private static Produto toDomain(ProdutoEntity produto) {
+    public static Produto toDomain(ProdutoEntity produto) {
         return Produto.builder()
                 .categoria(produto.getCategoria())
                 .descricao(produto.getDescricao())

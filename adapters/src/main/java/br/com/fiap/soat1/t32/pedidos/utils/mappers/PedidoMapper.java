@@ -14,41 +14,43 @@ import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ListaPedidosProdutoData;
 import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ListaPedidosResponse;
 import br.com.fiap.soat1.t32.vendas.domain.Cliente;
 import br.com.fiap.soat1.t32.vendas.driven.entities.ClienteEntity;
-import org.springframework.stereotype.Service;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-public class PedidoMapper {
+import static lombok.AccessLevel.PRIVATE;
 
-	private Cliente toClienteDomain(ClientePedidoVo clientePedidoVo) {
+@NoArgsConstructor(access = PRIVATE)
+public final class PedidoMapper {
+
+	private static Cliente toClienteDomain(ClientePedidoVo clientePedidoVo) {
 		if (clientePedidoVo == null)
 			return null;
 		return Cliente.builder().id(clientePedidoVo.getId()).build();
 	}
 
-	private PedidoProduto toPedidoProdutoDomain(ProdutoPedidoVo produtoPedidoVo) {
+	private static PedidoProduto toPedidoProdutoDomain(ProdutoPedidoVo produtoPedidoVo) {
 		return PedidoProduto.builder()
 				.quantidade(produtoPedidoVo.getQuantidade())
 				.produto(toProdutoDomain(produtoPedidoVo))
 				.build();
 	}
 
-	private PedidoProduto toPedidoProdutoDomain(PedidoProdutoEntity entity) {
+	private static PedidoProduto toPedidoProdutoDomain(PedidoProdutoEntity entity) {
 		return PedidoProduto.builder()
 				.quantidade(entity.getQuantidade())
 				.produto(toProdutoDomain(entity))
 				.build();
 	}
 
-	private Produto toProdutoDomain(ProdutoPedidoVo produtoPedidoVo) {
+	private static Produto toProdutoDomain(ProdutoPedidoVo produtoPedidoVo) {
 		return Produto.builder()
 				.id(produtoPedidoVo.getId())
 				.build();
 	}
 
-	private Produto toProdutoDomain(PedidoProdutoEntity entity) {
+	private static Produto toProdutoDomain(PedidoProdutoEntity entity) {
 
 		var produto = entity.getProduto();
 
@@ -60,16 +62,16 @@ public class PedidoMapper {
 				.build();
 	}
 
-	private List<PedidoProduto> toListaProdutoDomain(List<ProdutoPedidoVo> listaProdutoPedidoVo) {
-		return listaProdutoPedidoVo.stream().map(this::toPedidoProdutoDomain).collect(Collectors.toList());
+	private static List<PedidoProduto> toListaProdutoDomain(List<ProdutoPedidoVo> listaProdutoPedidoVo) {
+		return listaProdutoPedidoVo.stream().map(PedidoMapper::toPedidoProdutoDomain).collect(Collectors.toList());
 	}
 
-	public Pedido toDomain(PedidoVo pedidoVo) {
+	public static Pedido toDomain(PedidoVo pedidoVo) {
 		return Pedido.builder().produtos(toListaProdutoDomain(pedidoVo.getProdutos()))
 				.cliente(toClienteDomain(pedidoVo.getCliente())).build();
 	}
 
-	public PedidoEntity toEntity(Pedido pedido) {
+	public static PedidoEntity toEntity(Pedido pedido) {
 		PedidoEntity pedidoEntity = new PedidoEntity();
 		if (pedido.getCliente() != null) {
 			pedidoEntity.setCliente(ClienteEntity.builder().id(pedido.getCliente().getId()).build());
@@ -78,24 +80,24 @@ public class PedidoMapper {
 		return pedidoEntity;
 	}
 
-	private Cliente fromEntityToDomain(ClienteEntity clienteEntity) {
+	private static Cliente fromEntityToDomain(ClienteEntity clienteEntity) {
 		if (clienteEntity == null)
 			return null;
 		return Cliente.builder().id(clienteEntity.getId()).nome(clienteEntity.getNome()).build();
 	}
 
-	public Pedido fromEntity(PedidoEntity pedidoEntity) {
+	public static Pedido fromEntity(PedidoEntity pedidoEntity) {
 		Pedido pedido = new Pedido();
 		pedido.setId(pedidoEntity.getId());
 		pedido.setCliente(fromEntityToDomain(pedidoEntity.getCliente()));
 		pedido.setStatus(pedidoEntity.getStatus());
 		pedido.setProdutos(pedidoEntity.getProdutos().stream()
-						.map(this::toPedidoProdutoDomain)
+						.map(PedidoMapper::toPedidoProdutoDomain)
 								.collect(Collectors.toList()));
 		return pedido;
 	}
 
-	public ListaPedidosData toListaVo(Pedido pedido) {
+	public static ListaPedidosData toListaVo(Pedido pedido) {
 		return ListaPedidosData.builder()
 				.id(pedido.getId())
 				.status(pedido.getStatus())
@@ -104,14 +106,14 @@ public class PedidoMapper {
 				.build();
 	}
 
-	private ListaPedidosClienteData toClienteVo(Cliente cliente) {
+	private static ListaPedidosClienteData toClienteVo(Cliente cliente) {
 		return cliente == null ? null : ListaPedidosClienteData.builder()
 				.nome(cliente.getNome())
 				.id(cliente.getId())
 				.build();
 	}
 
-	private List<ListaPedidosProdutoData> toListaProdutosVo(List<PedidoProduto> pedidoProdutos) {
+	private static List<ListaPedidosProdutoData> toListaProdutosVo(List<PedidoProduto> pedidoProdutos) {
 		return pedidoProdutos.stream()
 				.map(produto -> ListaPedidosProdutoData.builder()
 						.categoria(produto.getProduto().getCategoria())
@@ -122,10 +124,10 @@ public class PedidoMapper {
 				.collect(Collectors.toList());
 	}
 
-	public ListaPedidosResponse toListaResponse(List<Pedido> listaPedido) {
+	public static ListaPedidosResponse toListaResponse(List<Pedido> listaPedido) {
 		return ListaPedidosResponse.builder()
 				.pedidos(listaPedido.stream()
-						.map(this::toListaVo)
+						.map(PedidoMapper::toListaVo)
 						.collect(Collectors.toList())).build();
 	}
 

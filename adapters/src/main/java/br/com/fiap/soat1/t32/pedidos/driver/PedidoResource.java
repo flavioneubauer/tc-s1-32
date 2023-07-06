@@ -18,11 +18,10 @@ import lombok.RequiredArgsConstructor;
 class PedidoResource {
 
 	private final PedidoService pedidoService;
-	private final PedidoMapper pedidoMapper;
 
 	@PostMapping("/v1/pedidos")
 	public CriacaoPedidoResponse adicionarPedido(@RequestBody PedidoVo pedidoVo) {
-		var pedidoId = pedidoService.adicionarPedido(pedidoMapper.toDomain(pedidoVo));
+		var pedidoId = pedidoService.adicionarPedido(PedidoMapper.toDomain(pedidoVo));
 		return CriacaoPedidoResponse.builder().id(pedidoId).build();
 	}
 
@@ -34,7 +33,7 @@ class PedidoResource {
 
 	@GetMapping("/v1/pedidos")
 	public ResponseEntity<ListaPedidosResponse> listarPedidos() {
-		return ResponseEntity.ok(pedidoMapper.toListaResponse(pedidoService.listarPedidos()));
+		return ResponseEntity.ok(PedidoMapper.toListaResponse(pedidoService.listarPedidos()));
 	}
 
 }

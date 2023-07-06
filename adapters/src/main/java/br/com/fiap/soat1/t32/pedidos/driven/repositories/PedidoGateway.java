@@ -1,6 +1,5 @@
 package br.com.fiap.soat1.t32.pedidos.driven.repositories;
 
-import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pedidos.domain.Pedido;
 import br.com.fiap.soat1.t32.pedidos.domain.PedidoProduto;
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPedido;
@@ -29,12 +28,10 @@ public class PedidoGateway implements PedidoPort {
 	private final ProdutoDAO produtoDAO;
 	private final PedidoProdutoDAO pedidoProdutoDAO;
 
-	private final PedidoMapper pedidoMapper;
-
 	@Override
 	@Transactional
 	public Long criarPedido(Pedido pedido) {
-		var pedidoEntity = pedidoMapper.toEntity(pedido);
+		var pedidoEntity = PedidoMapper.toEntity(pedido);
 
 		pedidoEntity = pedidoDao.save(pedidoEntity);
 
@@ -62,7 +59,7 @@ public class PedidoGateway implements PedidoPort {
 		var pedidos = pedidoDao.findAll();
 		var iterator = pedidos.iterator();
 		while(iterator.hasNext()) {
-			listaPedidos.add(pedidoMapper.fromEntity(iterator.next()));
+			listaPedidos.add(PedidoMapper.fromEntity(iterator.next()));
 		}
 		return listaPedidos;
 	}
@@ -71,7 +68,7 @@ public class PedidoGateway implements PedidoPort {
 	public Pedido consultarPedido(Long idPedido) {
 		var pedido = pedidoDao.findById(idPedido);
 
-		return pedido.map(pedidoMapper::fromEntity).orElse(null);
+		return pedido.map(PedidoMapper::fromEntity).orElse(null);
 	}
 
 	private Map<Long, ProdutoEntity> getProdutos(List<PedidoProduto> pedidoProdutos) {
