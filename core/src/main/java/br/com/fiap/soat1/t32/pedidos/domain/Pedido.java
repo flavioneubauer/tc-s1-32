@@ -3,6 +3,7 @@ package br.com.fiap.soat1.t32.pedidos.domain;
 import br.com.fiap.soat1.t32.vendas.domain.Cliente;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,5 +17,4 @@ public class Pedido {
     private StatusPedido status;
     private Cliente cliente;
     private List<Produto> produtos;
-
 }

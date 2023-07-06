@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = PRIVATE)
 public class ClienteMapper {
 
-	public static Cliente map(ClienteVO clienteVO, UUID clienteId) {
+	public static Cliente toDomain(ClienteVO clienteVO, UUID clienteId) {
 		return Cliente.builder()
 				.id(clienteId)
 				.nome(clienteVO.getNome())
@@ -22,7 +22,7 @@ public class ClienteMapper {
 				.build();
 	}
 	
-	public static ClienteEntity map(Cliente cliente) {
+	public static ClienteEntity toEntity(Cliente cliente) {
 		return ClienteEntity.builder()
 				.id(cliente.getId())
 				.nome(cliente.getNome())
@@ -31,8 +31,8 @@ public class ClienteMapper {
 				.build();
 	}
 	
-	public static Cliente map(ClienteEntity clienteEntity) {
-		return Cliente.builder()
+	public static Cliente toDomain(ClienteEntity clienteEntity) {
+		return clienteEntity == null ? null :  Cliente.builder()
 				.id(clienteEntity.getId())
 				.nome(clienteEntity.getNome())
 				.cpf(clienteEntity.getCpf())
@@ -40,7 +40,7 @@ public class ClienteMapper {
 				.build();
 	}
 	
-	public static ConsultaClienteResponse mapResponse(Cliente cliente) {
+	public static ConsultaClienteResponse toResponse(Cliente cliente) {
 		return ConsultaClienteResponse.builder()
 				.id(cliente.getId())
 				.nome(cliente.getNome())

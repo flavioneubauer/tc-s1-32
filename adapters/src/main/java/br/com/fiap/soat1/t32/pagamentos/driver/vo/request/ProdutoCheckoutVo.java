@@ -1,18 +1,17 @@
-package br.com.fiap.soat1.t32.pedidos.driver.vo.response;
+package br.com.fiap.soat1.t32.pagamentos.driver.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ConsultaProdutoResponse {
+public class ProdutoCheckoutVo {
 
-    private List<ConsultaProdutoData> produtos;
+    private Long id;
+    private Long quantidade;
 
 }

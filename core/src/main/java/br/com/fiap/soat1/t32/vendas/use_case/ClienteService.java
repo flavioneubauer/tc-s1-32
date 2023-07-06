@@ -3,6 +3,8 @@ package br.com.fiap.soat1.t32.vendas.use_case;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import br.com.fiap.soat1.t32.exceptions.NotFoundException;
+import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.soat1.t32.vendas.utils.validadores.CpfValidator;
@@ -22,15 +24,21 @@ public class ClienteService {
 	}
 	
 	public Cliente consultarClientePorCpf(String cpf) {
-		return this.clientePort.consultarClientePorCpf(cpf);
+		final var cliente = this.clientePort.consultarClientePorCpf(cpf);
+
+		if(cliente == null) {
+			throw new NotFoundException("Cliente não cadastrado.");
+		}
+
+		return cliente;
 	}
 	
 	private void validarCliente(Cliente cliente) {
 		if(!CpfValidator.isCPF(cliente.getCpf())) {
-			throw new RuntimeException("CPF informado inválido.");
+			throw new ValidationException("CPF informado inválido.");
 		}
 		if(!isEmailValido(cliente.getEmail())) {
-			throw new RuntimeException("E-mail informado inválido.");
+			throw new ValidationException("E-mail informado inválido.");
 		}	
 	}
 	

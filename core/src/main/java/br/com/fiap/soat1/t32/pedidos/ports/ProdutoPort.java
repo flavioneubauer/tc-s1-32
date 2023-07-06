@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface ProdutoPort {
 
-    void criarProduto(Produto produto);
+    Long criarProduto(Produto produto);
     void excluirProduto(Long produtoId);
     void editarProduto(Produto produto);
     Set<Produto> consultarProdutoPorCategoria(CategoriaProduto categoriaProduto);

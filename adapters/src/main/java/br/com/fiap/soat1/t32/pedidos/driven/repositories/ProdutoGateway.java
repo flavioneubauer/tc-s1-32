@@ -7,18 +7,19 @@ import br.com.fiap.soat1.t32.pedidos.ports.ProdutoPort;
 import br.com.fiap.soat1.t32.pedidos.utils.mappers.ProdutoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-@Repository
+@Service
 @RequiredArgsConstructor
-public class ProdutoRepositoryImpl implements ProdutoPort {
+public class ProdutoGateway implements ProdutoPort {
 
     private final ProdutoDAO produtoDAO;
 
     @Override
-    public void criarProduto(Produto produto) {
-        produtoDAO.save(ProdutoMapper.map(produto));
+    public Long criarProduto(Produto produto) {
+        return produtoDAO.save(ProdutoMapper.toEntity(produto)).getId();
     }
 
     @Override
@@ -28,14 +29,11 @@ public class ProdutoRepositoryImpl implements ProdutoPort {
 
     @Override
     public void editarProduto(Produto produto) {
-        produtoDAO.save(ProdutoMapper.map(produto));
+        produtoDAO.save(ProdutoMapper.toEntity(produto));
     }
 
     @Override
     public Set<Produto> consultarProdutoPorCategoria(CategoriaProduto categoriaProduto) {
-        final var produtos =
-                produtoDAO.findAllByCategoria(categoriaProduto);
-
-        return ProdutoMapper.map(produtos);
+        return ProdutoMapper.toDomain(produtoDAO.findAllByCategoria(categoriaProduto));
     }
 }

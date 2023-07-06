@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ConsultaProdutoResponse {
+public class CriacaoProdutoResponse {
 
-    private List<ConsultaProdutoData> produtos;
+    private Long id;
 
 }

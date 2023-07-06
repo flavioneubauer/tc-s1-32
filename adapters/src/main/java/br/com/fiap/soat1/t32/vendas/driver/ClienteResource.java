@@ -36,7 +36,7 @@ public class ClienteResource {
             produces = {ALL_VALUE})
     public ResponseEntity<Void> cadastrarCliente(@RequestBody @Valid ClienteVO clienteVO) {
 
-		clienteService.cadastrarCliente(ClienteMapper.map(clienteVO, null));
+		clienteService.cadastrarCliente(ClienteMapper.toDomain(clienteVO, null));
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -49,6 +49,6 @@ public class ClienteResource {
 
 		final var cliente = clienteService.consultarClientePorCpf(cpf);
 
-		return ResponseEntity.ok(ClienteMapper.mapResponse(cliente));
+		return ResponseEntity.ok(ClienteMapper.toResponse(cliente));
 	}
 }
