@@ -11,7 +11,7 @@
     </parent>
     <groupId>br.com.fiap.soat1.t32</groupId>
     <artifactId>core</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>core</name>
     <description>SOA1 Turma 32</description>
 

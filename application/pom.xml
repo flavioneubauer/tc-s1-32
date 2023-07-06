@@ -9,7 +9,7 @@
     </parent>
     <groupId>br.com.fiap.soat1.t32</groupId>
     <artifactId>application</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>application</name>
     <description>Tech Challenge - Fast Food API - Projeto da Turma 32 - SOAT 1</description>
     <properties>
@@ -38,12 +38,12 @@
         <dependency>
             <groupId>br.com.fiap.soat1.t32</groupId>
             <artifactId>core</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>br.com.fiap.soat1.t32</groupId>
             <artifactId>adapters</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

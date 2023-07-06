@@ -9,7 +9,7 @@
     </parent>
     <groupId>br.com.fiap.soat1.t32</groupId>
     <artifactId>adapters</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>adapters</name>
     <description>Projeto da turma 32 soat 1</description>
     <properties>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>br.com.fiap.soat1.t32</groupId>
             <artifactId>core</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
