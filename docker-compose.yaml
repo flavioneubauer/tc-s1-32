@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.8'
 
 services:
   db:
@@ -7,13 +7,16 @@ services:
     environment:
       POSTGRES_DB: tc
       POSTGRES_PASSWORD: postgres
-
   app:
-    container_name: application
     image: tc-s1-32:latest
+    build:
+      dockerfile: Dockerfile
+      context: .
     ports: 
-        - 8080:8080
+        - 8080-8083:8080
     depends_on:
         - db
     environment:
         spring.datasource.url: jdbc:postgresql://db:5432/tc
+    pull_policy: always
+    restart: on-failure

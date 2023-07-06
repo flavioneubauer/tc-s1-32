@@ -5,9 +5,10 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY application application
-COPY lib lib
+COPY core core
+COPY adapters adapters
 
-RUN ./mvnw install -DskipTests && ./mvnw clean package -DskipTests
+RUN ./mvnw clean install -DskipTests && ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
