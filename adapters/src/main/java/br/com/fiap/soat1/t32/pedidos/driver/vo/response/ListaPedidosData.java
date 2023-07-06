@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,4 +15,7 @@ import lombok.NoArgsConstructor;
 public class ListaPedidosData {
     private Long id;
     private StatusPedido status;
+    private ListaPedidosClienteData cliente;
+    private List<ListaPedidosProdutoData> produtos;
+
 }

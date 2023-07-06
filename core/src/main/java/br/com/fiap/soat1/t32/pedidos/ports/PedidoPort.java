@@ -10,4 +10,6 @@ public interface PedidoPort {
 	Long criarPedido(Pedido pedido);
 	void alterarStatusPedido(Long id, StatusPedido statusPedido);
 	List<Pedido> listarPedidos();
+
+	Pedido consultarPedido(Long idPedido);
 }

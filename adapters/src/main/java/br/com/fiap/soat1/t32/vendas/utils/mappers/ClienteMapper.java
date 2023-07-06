@@ -17,7 +17,7 @@ public class ClienteMapper {
 		return Cliente.builder()
 				.id(clienteId)
 				.nome(clienteVO.getNome())
-				.cpf(clienteVO.getCpf())
+				.cpf(clienteVO.getCpf().replace(".", "").replace("-", ""))
 				.email(clienteVO.getEmail())
 				.build();
 	}

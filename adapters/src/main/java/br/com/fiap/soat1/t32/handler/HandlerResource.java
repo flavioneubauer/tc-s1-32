@@ -1,5 +1,6 @@
 package br.com.fiap.soat1.t32.handler;
 
+import br.com.fiap.soat1.t32.exceptions.DuplicateKeyException;
 import br.com.fiap.soat1.t32.exceptions.NotFoundException;
 import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.handler.vo.DetalheErro;
@@ -33,6 +34,11 @@ public class HandlerResource {
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<RespostaErro> tratarValidationException(ValidationException ve) {
+        return ResponseEntity.status(UNPROCESSABLE_ENTITY).body(getRespostaErro(ve, UNPROCESSABLE_ENTITY));
+    }
+    
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResponseEntity<RespostaErro> tratarDuplicateKeyException(DuplicateKeyException ve) {
         return ResponseEntity.status(UNPROCESSABLE_ENTITY).body(getRespostaErro(ve, UNPROCESSABLE_ENTITY));
     }
 
