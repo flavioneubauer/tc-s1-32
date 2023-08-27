@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: tc-s1-32
+  labels:
+    app: postgres
+spec:
+  serviceName: postgres
+  updateStrategy:
+    type: RollingUpdate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:12-alpine3.16
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: postgres
+              containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: "DB_USERNAME"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: "DB_PASSWORD"
+            - name: POSTGRES_DB
+              value: "tc"
+            - name: POSTGRES_INITDB_ARGS
+              value: "--data-checksums"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  #!/bin/sh
+                  set -eu
+
+                  /usr/local/bin/pg_isready \
+                    --username $POSTGRES_USER \
+                    --host localhost \
+                    --port 5432 \
+                    --dbname $POSTGRES_DB
+
+                  if test $? -ne 0; then
+                    exit 1
+                  fi
+
+                  exit 0
+          livenessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  #!/bin/sh
+                  set -eu
+
+                  /usr/local/bin/pg_isready \
+                    --username $POSTGRES_USER \
+                    --host localhost \
+                    --port 5432 \
+                    --dbname $POSTGRES_DB
+
+                  if test $? -ne 0; then
+                    exit 1
+                  fi
+
+                  exit 0
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "100Mi"
+            limits:
+              cpu: "2"
+              memory: "1024Mi"
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql
+      restartPolicy: Always
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Delete
