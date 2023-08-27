@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: tc
       POSTGRES_PASSWORD: postgres
   app:
-    image: tc-s1-32:latest
+    image: ghcr.io/flavioneubauer/tc-s1-32:${APP_VERSION}
     build:
       dockerfile: Dockerfile
       context: .
