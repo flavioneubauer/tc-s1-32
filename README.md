@@ -29,6 +29,8 @@ kubectl apply -f nlb.yaml
 
 Se por algum acaso precisar refazer esses passos, recomendo que rode o `minikube delete` e volte ao passo 2.
 
+Todos os pods, services e volumes estão contidos no namespace tc-s1-32.
+
 ### Build e push no container registry
 
 O build e push da imagem da aplicação pode ser feito pelo comando `./push2registry.sh identificador-da-versão`.
