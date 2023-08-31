@@ -1,7 +1,5 @@
 package br.com.fiap.soat1.t32.pagamentos.driven;
 
-import org.springframework.stereotype.Service;
-
 import br.com.fiap.soat1.t32.exceptions.IntegrationException;
 import br.com.fiap.soat1.t32.pagamentos.domain.Checkout;
 import br.com.fiap.soat1.t32.pagamentos.driven.client.PedidoClient;
@@ -10,6 +8,7 @@ import br.com.fiap.soat1.t32.pagamentos.utils.mappers.CheckoutMapper;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,5 @@ public class CheckoutGateway implements CheckoutPort {
             log.error(fe.contentUTF8());
             throw new IntegrationException("Não foi possível incluir o pedido.");
         }
-
-
     }
 }

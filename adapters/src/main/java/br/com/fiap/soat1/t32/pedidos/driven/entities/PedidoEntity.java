@@ -1,6 +1,7 @@
 package br.com.fiap.soat1.t32.pedidos.driven.entities;
 
-import br.com.fiap.soat1.t32.pedidos.domain.StatusPedido;
+import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
+import br.com.fiap.soat1.t32.pedidos.domain.StatusPreparacaoPedido;
 import br.com.fiap.soat1.t32.vendas.driven.entities.ClienteEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,9 +22,13 @@ public class PedidoEntity {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @Column
+    @Enumerated(STRING)
+    private StatusPreparacaoPedido statusPreparacao;
+
     @Column(nullable = false)
     @Enumerated(STRING)
-    private StatusPedido status;
+    private StatusPagamentoPedido statusPagamento;
 
     @ManyToOne
     private ClienteEntity cliente;

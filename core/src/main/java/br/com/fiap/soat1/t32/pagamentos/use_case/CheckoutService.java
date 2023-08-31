@@ -1,10 +1,10 @@
 package br.com.fiap.soat1.t32.pagamentos.use_case;
 
+import br.com.fiap.soat1.t32.pagamentos.ports.CheckoutPort;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pagamentos.domain.Checkout;
-import br.com.fiap.soat1.t32.pagamentos.ports.CheckoutPort;
 import lombok.RequiredArgsConstructor;
 
 @Service

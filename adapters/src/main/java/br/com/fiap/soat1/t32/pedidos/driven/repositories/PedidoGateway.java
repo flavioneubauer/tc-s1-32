@@ -2,7 +2,9 @@ package br.com.fiap.soat1.t32.pedidos.driven.repositories;
 
 import br.com.fiap.soat1.t32.pedidos.domain.Pedido;
 import br.com.fiap.soat1.t32.pedidos.domain.PedidoProduto;
-import br.com.fiap.soat1.t32.pedidos.domain.StatusPedido;
+import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
+import br.com.fiap.soat1.t32.pedidos.domain.StatusPreparacaoPedido;
+import br.com.fiap.soat1.t32.pedidos.driven.entities.PedidoEntity;
 import br.com.fiap.soat1.t32.pedidos.driven.entities.ProdutoEntity;
 import br.com.fiap.soat1.t32.pedidos.driven.repositories.dao.PedidoDao;
 import br.com.fiap.soat1.t32.pedidos.driven.repositories.dao.PedidoProdutoDAO;
@@ -45,10 +47,19 @@ public class PedidoGateway implements PedidoPort {
 	}
 
 	@Override
-	public void alterarStatusPedido(Long id, StatusPedido statusPedido) {
+	public void alterarStatusPreparacaoPedido(Long id, StatusPreparacaoPedido statusPreparacaoPedido) {
 		var pedido = pedidoDao.findById(id);
 		pedido.ifPresent(pedidoEntity -> {
-			pedidoEntity.setStatus(statusPedido);
+			pedidoEntity.setStatusPreparacao(statusPreparacaoPedido);
+			pedidoDao.save(pedidoEntity);
+		});
+	}
+
+	@Override
+	public void alterarStatusPagamentoPedido(Long id, StatusPagamentoPedido statusPagamentoPedido) {
+		var pedido = pedidoDao.findById(id);
+		pedido.ifPresent(pedidoEntity -> {
+			pedidoEntity.setStatusPagamento(statusPagamentoPedido);
 			pedidoDao.save(pedidoEntity);
 		});
 	}
@@ -57,9 +68,8 @@ public class PedidoGateway implements PedidoPort {
 	public List<Pedido> listarPedidos() {
 		var listaPedidos = new ArrayList<Pedido>();
 		var pedidos = pedidoDao.findAll();
-		var iterator = pedidos.iterator();
-		while(iterator.hasNext()) {
-			listaPedidos.add(PedidoMapper.fromEntity(iterator.next()));
+		for (PedidoEntity pedido : pedidos) {
+			listaPedidos.add(PedidoMapper.fromEntity(pedido));
 		}
 		return listaPedidos;
 	}
