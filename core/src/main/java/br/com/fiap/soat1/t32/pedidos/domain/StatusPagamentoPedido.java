@@ -4,7 +4,5 @@ public enum StatusPagamentoPedido {
 
     PENDENTE,
     APROVADO,
-    RECUSADO
-
-
+    RECUSADO;
 }

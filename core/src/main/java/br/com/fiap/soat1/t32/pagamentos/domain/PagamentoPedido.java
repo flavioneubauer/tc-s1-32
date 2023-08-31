@@ -13,5 +13,4 @@ public class PagamentoPedido {
 
     private Long idPedido;
     private Boolean pagamentoAprovado;
-
 }

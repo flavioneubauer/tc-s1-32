@@ -28,8 +28,8 @@ public class PagamentoService {
 
     private void validaStatusPagamento(Long idPedido) {
         //consultar pedido
-
+    	if(StatusPagamentoPedido.APROVADO.equals(pedidoService.consultarStatusPagamentoPedido(idPedido))) {
+    	}
         //validar se status do pedido não é RECUSADO
     }
-
 }

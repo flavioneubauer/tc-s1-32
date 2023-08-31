@@ -1,5 +1,10 @@
 package br.com.fiap.soat1.t32.pedidos.utils.mappers;
 
+import static lombok.AccessLevel.PRIVATE;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.fiap.soat1.t32.pedidos.domain.Pedido;
 import br.com.fiap.soat1.t32.pedidos.domain.PedidoProduto;
 import br.com.fiap.soat1.t32.pedidos.domain.Produto;
@@ -15,11 +20,6 @@ import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ListaPedidosResponse;
 import br.com.fiap.soat1.t32.vendas.domain.Cliente;
 import br.com.fiap.soat1.t32.vendas.driven.entities.ClienteEntity;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public final class PedidoMapper {
