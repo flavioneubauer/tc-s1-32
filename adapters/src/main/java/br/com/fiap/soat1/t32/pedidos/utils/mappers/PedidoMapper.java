@@ -76,7 +76,8 @@ public final class PedidoMapper {
 		if (pedido.getCliente() != null) {
 			pedidoEntity.setCliente(ClienteEntity.builder().id(pedido.getCliente().getId()).build());
 		}
-		pedidoEntity.setStatus(pedido.getStatus());
+		pedidoEntity.setStatusPreparacao(pedido.getStatusPreparacao());
+		pedidoEntity.setStatusPagamento(pedido.getStatusPagamento());
 		return pedidoEntity;
 	}
 
@@ -90,7 +91,8 @@ public final class PedidoMapper {
 		Pedido pedido = new Pedido();
 		pedido.setId(pedidoEntity.getId());
 		pedido.setCliente(fromEntityToDomain(pedidoEntity.getCliente()));
-		pedido.setStatus(pedidoEntity.getStatus());
+		pedido.setStatusPagamento(pedidoEntity.getStatusPagamento());
+		pedido.setStatusPreparacao(pedidoEntity.getStatusPreparacao());
 		pedido.setProdutos(pedidoEntity.getProdutos().stream()
 						.map(PedidoMapper::toPedidoProdutoDomain)
 								.collect(Collectors.toList()));
@@ -100,7 +102,8 @@ public final class PedidoMapper {
 	public static ListaPedidosData toListaVo(Pedido pedido) {
 		return ListaPedidosData.builder()
 				.id(pedido.getId())
-				.status(pedido.getStatus())
+				.statusPagamento(pedido.getStatusPagamento())
+				.statusPreparacao(pedido.getStatusPreparacao())
 				.produtos(toListaProdutosVo(pedido.getProdutos()))
 				.cliente(toClienteVo(pedido.getCliente()))
 				.build();

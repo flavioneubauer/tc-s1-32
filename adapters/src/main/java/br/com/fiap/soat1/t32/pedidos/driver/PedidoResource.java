@@ -1,7 +1,7 @@
 package br.com.fiap.soat1.t32.pedidos.driver;
 
 import br.com.fiap.soat1.t32.handler.vo.RespostaErro;
-import br.com.fiap.soat1.t32.pedidos.domain.StatusPedido;
+import br.com.fiap.soat1.t32.pedidos.domain.StatusPreparacaoPedido;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,12 +35,12 @@ class PedidoResource {
 	}
 
 	@PutMapping("/v1/pedidos/{id}/{status}")
-	@ApiResponse(responseCode = "204", description = "Status do pedido alterado com sucesso")
+	@ApiResponse(responseCode = "204", description = "Status de preparação do pedido alterado com sucesso")
 	@ApiResponse(responseCode = "422", description = "Erro de validação",
 			content = @Content(schema = @Schema(implementation = RespostaErro.class)))
-	@Operation(description = "Altera status do pedido")
-	public ResponseEntity<Void> alterarStatusPedido(@PathVariable Long id, @PathVariable StatusPedido status) {
-		pedidoService.alterarStatusPedido(id, status);
+	@Operation(description = "Altera status de preparação do pedido")
+	public ResponseEntity<Void> alterarStatusPreparacaoPedido(@PathVariable Long id, @PathVariable StatusPreparacaoPedido status) {
+		pedidoService.alterarStatusPreparacaoPedido(id, status);
 		return ResponseEntity.noContent().build();
 	}
 
