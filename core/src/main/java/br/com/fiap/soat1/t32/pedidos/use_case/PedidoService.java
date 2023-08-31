@@ -42,14 +42,14 @@ public class PedidoService {
 	public List<Pedido> listarPedidos(){
 		var pedidos = pedidoPort.listarPedidos();
 
-		pedidos.removeIf(pedido -> pedido.getStatus() == StatusPedido.FINALIZADO);
+		pedidos.removeIf(pedido -> pedido.getStatusPreparacao() == StatusPreparacaoPedido.FINALIZADO);
 		
-        Map<StatusPedido, Integer> orderMapping = new EnumMap<>(StatusPedido.class);
-        orderMapping.put(StatusPedido.PRONTO, 0);
-        orderMapping.put(StatusPedido.EM_PREPARACAO, 1);
-        orderMapping.put(StatusPedido.RECEBIDO, 2);
+        Map<StatusPreparacaoPedido, Integer> orderMapping = new EnumMap<>(StatusPreparacaoPedido.class);
+        orderMapping.put(StatusPreparacaoPedido.PRONTO, 0);
+        orderMapping.put(StatusPreparacaoPedido.EM_PREPARACAO, 1);
+        orderMapping.put(StatusPreparacaoPedido.RECEBIDO, 2);
 
-        pedidos.sort(Comparator.comparing(pedido -> orderMapping.get(pedido.getStatus())));
+        pedidos.sort(Comparator.comparing(pedido -> orderMapping.get(pedido.getStatusPreparacao())));
 
 		return pedidos;
 	}
