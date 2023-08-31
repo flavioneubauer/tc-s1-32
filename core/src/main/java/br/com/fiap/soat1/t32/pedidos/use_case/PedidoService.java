@@ -1,6 +1,9 @@
 package br.com.fiap.soat1.t32.pedidos.use_case;
 
+import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import org.springframework.stereotype.Service;
@@ -28,7 +31,18 @@ public class PedidoService {
 	}
 	
 	public List<Pedido> listarPedidos(){
-		return pedidoPort.listarPedidos();
+		var pedidos = pedidoPort.listarPedidos();
+
+		pedidos.removeIf(pedido -> pedido.getStatus() == StatusPedido.FINALIZADO);
+		
+        Map<StatusPedido, Integer> orderMapping = new EnumMap<>(StatusPedido.class);
+        orderMapping.put(StatusPedido.PRONTO, 0);
+        orderMapping.put(StatusPedido.EM_PREPARACAO, 1);
+        orderMapping.put(StatusPedido.RECEBIDO, 2);
+
+        pedidos.sort(Comparator.comparing(pedido -> orderMapping.get(pedido.getStatus())));
+
+		return pedidos;
 	}
 
 	private void validaStatusPedido(Long idPedido, StatusPedido status) {
