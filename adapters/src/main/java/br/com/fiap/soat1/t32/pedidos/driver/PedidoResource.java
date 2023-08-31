@@ -45,7 +45,7 @@ class PedidoResource {
 	}
 
 	@GetMapping("/v1/pedidos")
-	@ApiResponse(responseCode = "200", description = "Pedidos listados com sucesso")
+	@ApiResponse(responseCode = "200", description = "Status de pedido retornado com sucesso")
 	@ApiResponse(responseCode = "422", description = "Erro de validação",
 			content = @Content(schema = @Schema(implementation = RespostaErro.class)))
 	@Operation(description = "Lista pedidos")
@@ -53,4 +53,12 @@ class PedidoResource {
 		return ResponseEntity.ok(PedidoMapper.toListaResponse(pedidoService.listarPedidos()));
 	}
 
+	@GetMapping("/v1/pedidos/{idPedido}")
+	@ApiResponse(responseCode = "200", description = "Pedidos listados com sucesso")
+	@ApiResponse(responseCode = "422", description = "Erro de validação",
+			content = @Content(schema = @Schema(implementation = RespostaErro.class)))
+	@Operation(description = "Consulta Status Pedido")
+	public ResponseEntity<String> consultarStatusPagamentoPedido(@PathVariable Long idPedido) {
+		return ResponseEntity.ok(pedidoService.consultarStatusPagamentoPedido(idPedido));
+	}
 }

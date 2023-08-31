@@ -1,6 +1,7 @@
 package br.com.fiap.soat1.t32.pedidos.use_case;
 
 import java.util.List;
+import java.util.Objects;
 
 import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
@@ -21,6 +22,7 @@ public class PedidoService {
 	private final PedidoPort pedidoPort;
 
     public Long adicionarPedido(Pedido pedido){
+    	//pedido.setStatusPagamento(PENDENTE);
     	validarStatusInclusaoPedido(pedido);
 
     	return pedidoPort.criarPedido(pedido);
@@ -38,6 +40,15 @@ public class PedidoService {
 	
 	public List<Pedido> listarPedidos(){
 		return pedidoPort.listarPedidos();
+	}
+	
+	public String consultarStatusPagamentoPedido(Long idPedido) {
+		Pedido pedido = pedidoPort.consultarPedido(idPedido);
+		
+		if(Objects.nonNull(pedido)) {
+			return pedido.getStatusPagamento().name();
+		}
+		return null;
 	}
 
 	private void validarPreparacaoAlteracaoPedido(Long idPedido, StatusPreparacaoPedido status) {
@@ -65,7 +76,8 @@ public class PedidoService {
 	private void validarStatusInclusaoPedido(final Pedido pedido) {
 		if(!isNull(pedido.getStatusPreparacao())) {
 			throw new ValidationException("Status de preparação não pode ser informado na criação do pedido.");
-		} else if(isNull(pedido.getStatusPagamento()) || !PENDENTE.equals(pedido.getStatusPagamento())) {
+		//} else if(isNull(pedido.getStatusPagamento()) || !PENDENTE.equals(pedido.getStatusPagamento())) {
+		} else if(!isNull(pedido.getStatusPagamento()) && !PENDENTE.equals(pedido.getStatusPagamento())) {
 			throw new ValidationException("Status de pagamento informado deve ser PENDENTE na criação do pedido.");
 		}
 	}

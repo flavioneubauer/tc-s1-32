@@ -6,6 +6,4 @@ public enum CategoriaProduto {
     ACOMPANHAMENTO,
     BEBIDA,
     SOBREMESA;
-
-
 }
