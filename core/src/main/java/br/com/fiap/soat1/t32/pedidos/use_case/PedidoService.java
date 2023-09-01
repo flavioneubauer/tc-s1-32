@@ -22,7 +22,7 @@ public class PedidoService {
 	private final PedidoPort pedidoPort;
 
     public Long adicionarPedido(Pedido pedido){
-    	//pedido.setStatusPagamento(PENDENTE);
+    	pedido.setStatusPagamento(PENDENTE);
     	validarStatusInclusaoPedido(pedido);
 
     	return pedidoPort.criarPedido(pedido);

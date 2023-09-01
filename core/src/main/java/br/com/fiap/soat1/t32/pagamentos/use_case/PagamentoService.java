@@ -1,5 +1,6 @@
 package br.com.fiap.soat1.t32.pagamentos.use_case;
 
+import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pagamentos.domain.PagamentoPedido;
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPreparacaoPedido;
@@ -27,9 +28,8 @@ public class PagamentoService {
     }
 
     private void validaStatusPagamento(Long idPedido) {
-        //consultar pedido
     	if(StatusPagamentoPedido.APROVADO.equals(pedidoService.consultarStatusPagamentoPedido(idPedido))) {
+    		throw new ValidationException("Já consta aprovação do pagamento para o pedido " + idPedido);
     	}
-        //validar se status do pedido não é RECUSADO
     }
 }
