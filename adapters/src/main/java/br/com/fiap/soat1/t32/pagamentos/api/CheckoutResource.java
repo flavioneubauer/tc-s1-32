@@ -1,10 +1,10 @@
-package br.com.fiap.soat1.t32.pagamentos.driver;
+package br.com.fiap.soat1.t32.pagamentos.api;
 
 import br.com.fiap.soat1.t32.handler.vo.RespostaErro;
-import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.CheckoutVo;
-import br.com.fiap.soat1.t32.pagamentos.driver.vo.response.CheckoutResponse;
+import br.com.fiap.soat1.t32.pagamentos.adapter.CheckoutAdapter;
+import br.com.fiap.soat1.t32.pagamentos.api.vo.request.CheckoutVo;
+import br.com.fiap.soat1.t32.pagamentos.api.vo.response.CheckoutResponse;
 import br.com.fiap.soat1.t32.pagamentos.use_case.CheckoutService;
-import br.com.fiap.soat1.t32.pagamentos.utils.mappers.CheckoutMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,8 +36,8 @@ public class CheckoutResource {
             produces = {APPLICATION_JSON_VALUE})
     public ResponseEntity<CheckoutResponse> realizaCheckout(@RequestBody CheckoutVo checkoutVo) {
 
-        final var idPedido = checkoutService.realizarCheckout(CheckoutMapper.toDomain(checkoutVo));
+        final var idPedido = checkoutService.realizarCheckout(CheckoutAdapter.toDomain(checkoutVo));
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(CheckoutMapper.toResponse(idPedido));
+        return ResponseEntity.status(HttpStatus.CREATED).body(CheckoutAdapter.toResponse(idPedido));
     }
 }

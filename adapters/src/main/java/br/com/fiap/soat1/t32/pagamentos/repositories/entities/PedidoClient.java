@@ -1,7 +1,7 @@
-package br.com.fiap.soat1.t32.pagamentos.driven.client;
+package br.com.fiap.soat1.t32.pagamentos.repositories.entities;
 
-import br.com.fiap.soat1.t32.pagamentos.driven.client.vo.CriarPedidoResponse;
-import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.CheckoutVo;
+import br.com.fiap.soat1.t32.pagamentos.api.vo.request.CheckoutVo;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

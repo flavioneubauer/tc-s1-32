@@ -2,8 +2,6 @@ package br.com.fiap.soat1.t32.pagamentos.use_case;
 
 import static java.lang.Boolean.TRUE;
 
-import org.springframework.stereotype.Service;
-
 import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pagamentos.domain.PagamentoPedido;
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
@@ -11,7 +9,6 @@ import br.com.fiap.soat1.t32.pedidos.domain.StatusPreparacaoPedido;
 import br.com.fiap.soat1.t32.pedidos.use_case.PedidoService;
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class PagamentoService {
 

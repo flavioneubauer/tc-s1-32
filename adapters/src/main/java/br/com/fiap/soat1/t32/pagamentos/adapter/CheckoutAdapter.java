@@ -1,11 +1,11 @@
-package br.com.fiap.soat1.t32.pagamentos.utils.mappers;
+package br.com.fiap.soat1.t32.pagamentos.adapter;
 
+import br.com.fiap.soat1.t32.pagamentos.api.vo.request.CheckoutVo;
+import br.com.fiap.soat1.t32.pagamentos.api.vo.request.ClienteCheckoutVo;
+import br.com.fiap.soat1.t32.pagamentos.api.vo.request.ProdutoCheckoutVo;
+import br.com.fiap.soat1.t32.pagamentos.api.vo.response.CheckoutResponse;
 import br.com.fiap.soat1.t32.pagamentos.domain.Checkout;
 import br.com.fiap.soat1.t32.pagamentos.domain.ProdutoCheckout;
-import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.CheckoutVo;
-import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.ClienteCheckoutVo;
-import br.com.fiap.soat1.t32.pagamentos.driver.vo.request.ProdutoCheckoutVo;
-import br.com.fiap.soat1.t32.pagamentos.driver.vo.response.CheckoutResponse;
 import lombok.NoArgsConstructor;
 
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
-public final class CheckoutMapper {
+public final class CheckoutAdapter {
 
     public static CheckoutVo toRequest(Checkout checkout) {
         return CheckoutVo.builder()

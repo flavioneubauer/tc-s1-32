@@ -1,4 +1,4 @@
-package br.com.fiap.soat1.t32.pagamentos.driver.vo.request;
+package br.com.fiap.soat1.t32.pagamentos.api.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

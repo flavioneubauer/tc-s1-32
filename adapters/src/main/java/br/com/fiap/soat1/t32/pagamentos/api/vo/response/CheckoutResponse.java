@@ -1,4 +1,4 @@
-package br.com.fiap.soat1.t32.pagamentos.driver.vo.request;
+package br.com.fiap.soat1.t32.pagamentos.api.vo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PagamentoPedidoVo {
+public class CheckoutResponse {
 
     private Long idPedido;
-    private Boolean pagamentoAprovado;
 
 }

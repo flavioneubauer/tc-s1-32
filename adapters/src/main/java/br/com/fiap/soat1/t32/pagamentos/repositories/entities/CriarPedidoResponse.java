@@ -1,4 +1,4 @@
-package br.com.fiap.soat1.t32.pagamentos.driven.client.vo;
+package br.com.fiap.soat1.t32.pagamentos.repositories.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
