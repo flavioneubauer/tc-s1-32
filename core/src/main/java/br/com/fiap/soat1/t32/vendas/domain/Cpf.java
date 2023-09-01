@@ -1,10 +1,23 @@
-package br.com.fiap.soat1.t32.vendas.utils.validadores;
+package br.com.fiap.soat1.t32.vendas.domain;
 
 import java.util.InputMismatchException;
 
-public class CpfValidator {
+import br.com.fiap.soat1.t32.exceptions.ValidationException;
+import lombok.Getter;
 
-	public static boolean isCPF(String cpf) {
+@Getter
+public class Cpf {
+
+	private String cpf;
+	
+	public Cpf(String cpf) {
+		if(!isValido(cpf)) {
+			throw new ValidationException("CPF informado inválido.");
+		}
+		this.cpf = cpf;
+	}
+	
+	private boolean isValido(String cpf) {
 
 		cpf = removeCaracteresEspeciais(cpf);
 
@@ -62,7 +75,7 @@ public class CpfValidator {
 		}
 	}
 
-	private static String removeCaracteresEspeciais(String cpf) {
+	private String removeCaracteresEspeciais(String cpf) {
 		if (cpf.contains(".")) {
 			cpf = cpf.replace(".", "");
 		}

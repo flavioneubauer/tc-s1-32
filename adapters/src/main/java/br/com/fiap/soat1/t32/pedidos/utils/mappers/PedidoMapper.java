@@ -18,7 +18,7 @@ import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ListaPedidosData;
 import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ListaPedidosProdutoData;
 import br.com.fiap.soat1.t32.pedidos.driver.vo.response.ListaPedidosResponse;
 import br.com.fiap.soat1.t32.vendas.domain.Cliente;
-import br.com.fiap.soat1.t32.vendas.driven.entities.ClienteEntity;
+import br.com.fiap.soat1.t32.vendas.repositories.entities.ClienteDb;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = PRIVATE)
@@ -27,7 +27,9 @@ public final class PedidoMapper {
 	private static Cliente toClienteDomain(ClientePedidoVo clientePedidoVo) {
 		if (clientePedidoVo == null)
 			return null;
-		return Cliente.builder().id(clientePedidoVo.getId()).build();
+		var cliente = new Cliente();
+		cliente.setId(clientePedidoVo.getId());
+		return cliente;
 	}
 
 	private static PedidoProduto toPedidoProdutoDomain(ProdutoPedidoVo produtoPedidoVo) {
@@ -74,17 +76,20 @@ public final class PedidoMapper {
 	public static PedidoEntity toEntity(Pedido pedido) {
 		PedidoEntity pedidoEntity = new PedidoEntity();
 		if (pedido.getCliente() != null) {
-			pedidoEntity.setCliente(ClienteEntity.builder().id(pedido.getCliente().getId()).build());
+			pedidoEntity.setCliente(ClienteDb.builder().id(pedido.getCliente().getId()).build());
 		}
 		pedidoEntity.setStatusPreparacao(pedido.getStatusPreparacao());
 		pedidoEntity.setStatusPagamento(pedido.getStatusPagamento());
 		return pedidoEntity;
 	}
 
-	private static Cliente fromEntityToDomain(ClienteEntity clienteEntity) {
+	private static Cliente fromEntityToDomain(ClienteDb clienteEntity) {
 		if (clienteEntity == null)
 			return null;
-		return Cliente.builder().id(clienteEntity.getId()).nome(clienteEntity.getNome()).build();
+		var cliente = new Cliente();
+		cliente.setId(clienteEntity.getId());
+		cliente.setNome(clienteEntity.getNome());
+		return cliente;
 	}
 
 	public static Pedido fromEntity(PedidoEntity pedidoEntity) {

@@ -1,12 +1,8 @@
-package br.com.fiap.soat1.t32.vendas.driver;
+package br.com.fiap.soat1.t32.vendas.api;
 
 import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import br.com.fiap.soat1.t32.handler.vo.RespostaErro;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.soat1.t32.vendas.utils.mappers.ClienteMapper;
-import br.com.fiap.soat1.t32.vendas.driver.vo.request.ClienteVO;
-import br.com.fiap.soat1.t32.vendas.driver.vo.response.ConsultaClienteResponse;
-import br.com.fiap.soat1.t32.vendas.use_case.ClienteService;
+import br.com.fiap.soat1.t32.handler.vo.RespostaErro;
+import br.com.fiap.soat1.t32.vendas.api.vo.request.ClienteVO;
+import br.com.fiap.soat1.t32.vendas.api.vo.response.ConsultaClienteResponse;
+import br.com.fiap.soat1.t32.vendas.controller.ClienteController;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ClienteResource {
 
-	private final ClienteService clienteService;
+	private final ClienteController clienteController;
 	
 	@Operation(description = "Inclui cliente")
     @PostMapping(consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
@@ -42,9 +41,7 @@ public class ClienteResource {
 	@ApiResponse(responseCode = "422", description = "Erro de validação",
 			content = @Content(schema = @Schema(implementation = RespostaErro.class)))
     public ResponseEntity<Void> cadastrarCliente(@RequestBody @Valid ClienteVO clienteVO) {
-
-		clienteService.cadastrarCliente(ClienteMapper.toDomain(clienteVO, null));
-
+		clienteController.cadastrar(clienteVO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 	
@@ -56,9 +53,6 @@ public class ClienteResource {
 	@ApiResponse(responseCode = "422", description = "Erro de validação",
 			content = @Content(schema = @Schema(implementation = RespostaErro.class)))
 	public ResponseEntity<ConsultaClienteResponse> consultarClientePorCpf(@PathVariable String cpf) {
-
-		final var cliente = clienteService.consultarClientePorCpf(cpf);
-
-		return ResponseEntity.ok(ClienteMapper.toResponse(cliente));
+		return ResponseEntity.ok(clienteController.consultarPorCpf(cpf));
 	}
 }

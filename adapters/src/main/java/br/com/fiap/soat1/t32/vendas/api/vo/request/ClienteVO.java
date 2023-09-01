@@ -1,4 +1,4 @@
-package br.com.fiap.soat1.t32.vendas.driver.vo.request;
+package br.com.fiap.soat1.t32.vendas.api.vo.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package br.com.fiap.soat1.t32.vendas.driver.vo.response;
+package br.com.fiap.soat1.t32.vendas.api.vo.response;
 
 import java.util.UUID;
 

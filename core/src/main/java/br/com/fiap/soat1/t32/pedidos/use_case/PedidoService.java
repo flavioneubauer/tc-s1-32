@@ -1,19 +1,19 @@
 package br.com.fiap.soat1.t32.pedidos.use_case;
 
+import static br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido.PENDENTE;
+import static java.util.Objects.isNull;
+
 import java.util.List;
 import java.util.Objects;
 
-import br.com.fiap.soat1.t32.exceptions.ValidationException;
-import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
 import org.springframework.stereotype.Service;
 
+import br.com.fiap.soat1.t32.exceptions.ValidationException;
 import br.com.fiap.soat1.t32.pedidos.domain.Pedido;
+import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPreparacaoPedido;
 import br.com.fiap.soat1.t32.pedidos.ports.PedidoPort;
 import lombok.RequiredArgsConstructor;
-
-import static br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido.PENDENTE;
-import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor

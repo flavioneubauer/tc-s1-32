@@ -2,7 +2,7 @@ package br.com.fiap.soat1.t32.pedidos.driven.entities;
 
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPagamentoPedido;
 import br.com.fiap.soat1.t32.pedidos.domain.StatusPreparacaoPedido;
-import br.com.fiap.soat1.t32.vendas.driven.entities.ClienteEntity;
+import br.com.fiap.soat1.t32.vendas.repositories.entities.ClienteDb;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,7 +31,7 @@ public class PedidoEntity {
     private StatusPagamentoPedido statusPagamento;
 
     @ManyToOne
-    private ClienteEntity cliente;
+    private ClienteDb cliente;
 
     @OneToMany(mappedBy = "pedido")
     Set<PedidoProdutoEntity> produtos;

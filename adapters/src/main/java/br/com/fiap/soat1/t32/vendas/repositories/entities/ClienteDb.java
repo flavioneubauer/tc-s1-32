@@ -1,4 +1,4 @@
-package br.com.fiap.soat1.t32.vendas.driven.entities;
+package br.com.fiap.soat1.t32.vendas.repositories.entities;
 
 import java.util.UUID;
 
@@ -19,7 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity(name = "CLIENTE")
-public class ClienteEntity {
+public class ClienteDb {
 
     @Id
     @GeneratedValue(strategy= GenerationType.UUID)
