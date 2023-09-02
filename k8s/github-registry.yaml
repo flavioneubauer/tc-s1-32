@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJnaGNyLmlvIjp7ImF1dGgiOiJabXhoZG1sdmJtVjFZbUYxWlhJNloyaHdYMmRSV0hWblRIZHhha3hGVG05dFVFUm1TVnB3TTBOb2MwUndTVEkzYWpKSFMwVjRZdz09In19fQ==
+kind: Secret
+metadata:
+  name: github-registry
+  namespace: tc-s1-32
+type: kubernetes.io/dockerconfigjson
