@@ -2,6 +2,176 @@
 
 ## Fase 2
 
+### Estrutura em Clean Architecture
+
+O projeto segue a seguinte estrutura:
+
+- external: database, controller, apis e adapters
+- core: entities, use cases e interface de repositories
+- application: inicialização da aplicação
+
+Existe um módulo principal chamado `tc` que agrupa os 3 módulos.
+
+Documentação de apoio: https://spring.io/guides/gs/multi-module/
+
+Para executar:
+
+```sh
+./mvnw install -DskipTests && ./mvnw spring-boot:run -pl application
+```
+
+2.1 Estrtura do módulo core
+```
+core 
+├── pom.xml
+└── src
+|  ├── main
+|  |  └── java
+|  |     ├── META-INF
+|  |     |  └── MANIFEST.MF
+|  |     └── br
+|  |        └── com
+|  |           └── fiap
+|  |              └── soat1
+|  |                 └── t32
+|  |                    ├── exceptions
+|  |                    |  ├── DuplicateKeyException.java
+|  |                    |  ├── IntegrationException.java
+|  |                    |  ├── NotFoundException.java
+|  |                    |  └── ValidationException.java
+|  |                    ├── pagamentos
+|  |                    |  ├── entities
+|  |                    |  |  ├── Checkout.java
+|  |                    |  |  ├── PagamentoPedido.java
+|  |                    |  |  └── ProdutoCheckout.java
+|  |                    |  └── use_cases
+|  |                    |     ├── CheckoutService.java
+|  |                    |     └── PagamentoService.java
+|  |                    ├── pedidos
+|  |                    |  ├── entities
+|  |                    |  |  ├── CategoriaProduto.java
+|  |                    |  |  ├── Pedido.java
+|  |                    |  |  ├── PedidoProduto.java
+|  |                    |  |  ├── Produto.java
+|  |                    |  |  ├── StatusPagamentoPedido.java
+|  |                    |  |  └── StatusPreparacaoPedido.java
+|  |                    |  ├── repositories
+|  |                    |  |  ├── PedidoRepository.java
+|  |                    |  |  └── ProdutoRepository.java
+|  |                    |  └── use_cases
+|  |                    |     ├── PedidoService.java
+|  |                    |     └── ProdutoService.java
+|  |                    └── vendas
+|  |                       ├── entities
+|  |                       |  ├── Cliente.java
+|  |                       |  ├── Cpf.java
+|  |                       |  └── Email.java
+|  |                       ├── repositories
+|  |                       |  └── ClienteRepository.java
+|  |                       └── use_cases
+|  |                          └── ClienteService.java
+```
+
+2.2 Estrutura do módulo external
+```
+external
+├── pom.xml
+└── src
+|  └── main
+|     └── java
+|        ├── META-INF
+|        |  └── MANIFEST.MF
+|        └── br
+|           └── com
+|              └── fiap
+|                 └── soat1
+|                    └── t32
+|                       ├── configs
+|                       |  ├── CheckoutConfiguration.java
+|                       |  ├── ClienteConfiguration.java
+|                       |  ├── PagamentoConfiguration.java
+|                       |  ├── PedidoConfiguration.java
+|                       |  └── ProdutoConfiguration.java
+|                       ├── handler
+|                       |  ├── HandlerResource.java
+|                       |  └── vo
+|                       |     ├── DetalheErro.java
+|                       |     └── RespostaErro.java
+|                       ├── pagamentos
+|                       |  ├── adapters
+|                       |  |  ├── CheckoutAdapter.java
+|                       |  |  └── PagamentoAdapter.java
+|                       |  ├── apis
+|                       |  |  ├── CheckoutResource.java
+|                       |  |  ├── PagamentoWebhookResource.java
+|                       |  |  └── vo
+|                       |  |     ├── request
+|                       |  |     |  ├── CheckoutVo.java
+|                       |  |     |  ├── ClienteCheckoutVo.java
+|                       |  |     |  ├── PagamentoPedidoVo.java
+|                       |  |     |  └── ProdutoCheckoutVo.java
+|                       |  |     └── response
+|                       |  |        └── CheckoutResponse.java
+|                       |  └── controllers
+|                       |     ├── CheckoutController.java
+|                       |     └── PagamentoWebhookController.java
+|                       ├── pedidos
+|                       |  ├── adapters
+|                       |  |  ├── PedidoAdapter.java
+|                       |  |  ├── PedidoProdutoAdapter.java
+|                       |  |  └── ProdutoAdapter.java
+|                       |  ├── apis
+|                       |  |  ├── PedidoResource.java
+|                       |  |  ├── ProdutoResource.java
+|                       |  |  └── vo
+|                       |  |     ├── request
+|                       |  |     |  ├── ClientePedidoVo.java
+|                       |  |     |  ├── PedidoVo.java
+|                       |  |     |  ├── ProdutoPedidoVo.java
+|                       |  |     |  └── ProdutoVo.java
+|                       |  |     └── response
+|                       |  |        ├── ConsultaProdutoData.java
+|                       |  |        ├── ConsultaProdutoResponse.java
+|                       |  |        ├── CriacaoPedidoResponse.java
+|                       |  |        ├── CriacaoProdutoResponse.java
+|                       |  |        ├── ListaPedidosClienteData.java
+|                       |  |        ├── ListaPedidosData.java
+|                       |  |        ├── ListaPedidosProdutoData.java
+|                       |  |        └── ListaPedidosResponse.java
+|                       |  ├── controllers
+|                       |  |  ├── PedidoController.java
+|                       |  |  └── ProdutoController.java
+|                       |  └── repositories
+|                       |     ├── PedidoCrudRepository.java
+|                       |     ├── PedidoProdutoCrudRepository.java
+|                       |     ├── PedidoRepositoryImpl.java
+|                       |     ├── ProdutoCrudRepository.java
+|                       |     ├── ProdutoRepositoryImpl.java
+|                       |     └── entities
+|                       |        ├── PedidoDb.java
+|                       |        ├── PedidoProdutoDb.java
+|                       |        ├── PedidoProdutoKey.java
+|                       |        └── ProdutoDb.java
+|                       └── vendas
+|                          ├── adapters
+|                          |  └── ClienteAdapter.java
+|                          ├── apis
+|                          |  ├── ClienteResource.java
+|                          |  └── vo
+|                          |     ├── request
+|                          |     |  └── ClienteVO.java
+|                          |     └── response
+|                          |        └── ConsultaClienteResponse.java
+|                          ├── controllers
+|                          |  └── ClienteController.java
+|                          └── repositories
+|                             ├── ClienteCrudRepository.java
+|                             ├── ClienteRepositoryImpl.java
+|                             └── entities
+|                                └── ClienteDb.java
+
+```
+
 ### Teste da aplicação em k8s
 
 Para subida do projeto em um cluster kubernetes, mais espeficamente no minikube, se faz necessário executar os seguintes passos:

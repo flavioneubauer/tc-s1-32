@@ -3,6 +3,7 @@ package br.com.fiap.soat1.t32.pagamentos.apis;
 import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 
+
+@Tag(name = "Webhook", description = "Webhook de pagamento de pedido")
 @RequestMapping(value = "/v1/webhook",
         consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
         produces = {APPLICATION_JSON_VALUE})

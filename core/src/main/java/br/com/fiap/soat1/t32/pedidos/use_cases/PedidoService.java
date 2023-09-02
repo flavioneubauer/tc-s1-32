@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.*;
 
 import static br.com.fiap.soat1.t32.pedidos.entities.StatusPagamentoPedido.PENDENTE;
+import static br.com.fiap.soat1.t32.pedidos.entities.StatusPagamentoPedido.RECUSADO;
 import static java.util.Objects.isNull;
 
 @RequiredArgsConstructor
@@ -64,18 +65,25 @@ public class PedidoService {
 		if(pedido == null) {
 			throw new ValidationException("Pedido não localizado.");
 		} else{
-			if(isNull(pedido.getStatusPreparacao()) &&
-					StatusPreparacaoPedido.RECEBIDO != status) {
-				throw new ValidationException("Pedido sem status de preparação só pode ser alterado para RECEBIDO.");
-			} else if(StatusPreparacaoPedido.RECEBIDO == pedido.getStatusPreparacao() &&
-				StatusPreparacaoPedido.EM_PREPARACAO != status) {
-				throw new ValidationException("Pedido RECEBIDO só pode ser alterado para EM PREPARAÇÃO.");
-			} else if(StatusPreparacaoPedido.EM_PREPARACAO == pedido.getStatusPreparacao() &&
-					StatusPreparacaoPedido.PRONTO != status) {
-				throw new ValidationException("Pedido EM PREPARAÇÃO só pode ser alterado para PRONTO.");
-			} else if(StatusPreparacaoPedido.PRONTO == pedido.getStatusPreparacao() &&
-					StatusPreparacaoPedido.FINALIZADO != status) {
-				throw new ValidationException("Pedido PRONTO só pode ser alterado para FINALIZADO.");
+
+			if(isNull(pedido.getStatusPagamento()) ||
+				RECUSADO.equals(pedido.getStatusPagamento()) ||
+				PENDENTE.equals(pedido.getStatusPagamento())) {
+				throw new ValidationException("Pedido com status de pagamento diferente de APROVADO não pode ser preparado.");
+			} else {
+				if(isNull(pedido.getStatusPreparacao()) &&
+						StatusPreparacaoPedido.RECEBIDO != status) {
+					throw new ValidationException("Pedido sem status de preparação só pode ser alterado para RECEBIDO.");
+				} else if(StatusPreparacaoPedido.RECEBIDO == pedido.getStatusPreparacao() &&
+						StatusPreparacaoPedido.EM_PREPARACAO != status) {
+					throw new ValidationException("Pedido RECEBIDO só pode ser alterado para EM PREPARAÇÃO.");
+				} else if(StatusPreparacaoPedido.EM_PREPARACAO == pedido.getStatusPreparacao() &&
+						StatusPreparacaoPedido.PRONTO != status) {
+					throw new ValidationException("Pedido EM PREPARAÇÃO só pode ser alterado para PRONTO.");
+				} else if(StatusPreparacaoPedido.PRONTO == pedido.getStatusPreparacao() &&
+						StatusPreparacaoPedido.FINALIZADO != status) {
+					throw new ValidationException("Pedido PRONTO só pode ser alterado para FINALIZADO.");
+				}
 			}
 		}
 	}
