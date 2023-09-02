@@ -6,7 +6,7 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY application application
 COPY core core
-COPY adapters adapters
+COPY external external
 
 RUN ./mvnw clean install -DskipTests && ./mvnw clean package -DskipTests
 
