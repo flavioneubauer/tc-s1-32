@@ -8,15 +8,28 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.fiap.soat1.t32</groupId>
-    <artifactId>application</artifactId>
+    <artifactId>external</artifactId>
     <version>2.0.0</version>
-    <name>application</name>
-    <description>Tech Challenge - Fast Food API - Projeto da Turma 32 - SOAT 1</description>
+    <name>external</name>
+    <description>Projeto da turma 32 soat 1</description>
     <properties>
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2022.0.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,10 +39,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-	    <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -41,13 +51,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>br.com.fiap.soat1.t32</groupId>
-            <artifactId>core</artifactId>
-            <version>2.0.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>br.com.fiap.soat1.t32</groupId>
-            <artifactId>external</artifactId>
+            <artifactId>core</artifactId>
             <version>2.0.0</version>
         </dependency>
         <dependency>
@@ -56,23 +66,8 @@
             <version>2.0.0</version>
         </dependency>
         <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-devtools</artifactId>
-	        <optional>true</optional>
-	    </dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>br.com.fiap.soat1.t32.Main</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-        <finalName>${project.name}-runner</finalName>
-    </build>
-
 </project>
