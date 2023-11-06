@@ -15,7 +15,7 @@ env:
   ECR_REPOSITORY: tc-s1-32                      # set this to your Amazon ECR repository name
   ECS_SERVICE: v2-app-v6                        # set this to your Amazon ECS service name
   ECS_CLUSTER: tc-s1-32                         # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: tc-s1-32-app.json        # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: .aws/tc-s1-32-app.json   # set this to the path to your Amazon ECS task definition
                                                 # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: app                           # set this to the name of the container in the
                                                 # containerDefinitions section of your task definition
