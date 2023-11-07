@@ -1,5 +1,9 @@
 package br.com.fiap.soat1.t32.pedidos.controllers;
 
+import static java.util.Objects.isNull;
+
+import org.springframework.stereotype.Service;
+
 import br.com.fiap.soat1.t32.pedidos.adapters.PedidoAdapter;
 import br.com.fiap.soat1.t32.pedidos.apis.vo.request.PedidoVo;
 import br.com.fiap.soat1.t32.pedidos.apis.vo.response.CriacaoPedidoResponse;
@@ -7,9 +11,6 @@ import br.com.fiap.soat1.t32.pedidos.apis.vo.response.ListaPedidosResponse;
 import br.com.fiap.soat1.t32.pedidos.entities.StatusPreparacaoPedido;
 import br.com.fiap.soat1.t32.pedidos.use_cases.PedidoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor

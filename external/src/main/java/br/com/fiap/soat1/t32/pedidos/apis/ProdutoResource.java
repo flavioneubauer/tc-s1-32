@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,7 @@ public class ProdutoResource {
     @ApiResponse(responseCode = "201", description = "Produto criado com sucesso")
     @ApiResponse(responseCode = "422", description = "Erro de validação",
             content = @Content(schema = @Schema(implementation = RespostaErro.class)))
+    @SecurityRequirement(name = "Authorization")
     public ResponseEntity<CriacaoProdutoResponse> criarProduto(@RequestBody ProdutoVo produtoVo) {
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoController.cadastrar(produtoVo));
     }
@@ -46,6 +48,7 @@ public class ProdutoResource {
     @ApiResponse(responseCode = "204", description = "Produto excluído com sucesso")
     @ApiResponse(responseCode = "422", description = "Erro de validação",
             content = @Content(schema = @Schema(implementation = RespostaErro.class)))
+    @SecurityRequirement(name = "Authorization")
     public ResponseEntity<Void> excluirProduto(@PathVariable Long produtoId) {
 
         produtoController.excluir(produtoId);
@@ -60,6 +63,7 @@ public class ProdutoResource {
     @ApiResponse(responseCode = "204", description = "Produto alterado com sucesso")
     @ApiResponse(responseCode = "422", description = "Erro de validação",
             content = @Content(schema = @Schema(implementation = RespostaErro.class)))
+    @SecurityRequirement(name = "Authorization")
     public ResponseEntity<Void> editarProduto(@PathVariable Long produtoId,
                                               @RequestBody ProdutoVo produtoVo) {
 
