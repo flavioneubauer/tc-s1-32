@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @Tag(name = "Pedido", description = "API de Pedido")
 @RestController
 @RequiredArgsConstructor
+@SecurityRequirement(name = "Authorization")
 class PedidoResource {
 
 	private final PedidoController pedidoController;
