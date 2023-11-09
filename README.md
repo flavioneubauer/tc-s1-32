@@ -1,5 +1,14 @@
 # TC SOAT 1 - TURMA 32
 
+## Fase 3
+
+Diagrama da Infra montada na infra:
+
+![aws-infra](aws-infra.png)
+
+Esse projeto possui o deploy via GitHub Actions para o AWS ECS.
+A task definition fica em .aws/task-definition.json.
+
 ## Fase 2
 
 ### Estrutura em Clean Architecture
